@@ -1,12 +1,12 @@
 # group3
-[c8網頁](https://skyler09090718-wq.github.io/group3/)
-## 幹你娘
+[#我是網頁#](https://skyler09090718-wq.github.io/group3/)
+## 第三組 
 
-### 爛
+                  組員
 
-#### 歌
+孫銘鋒(41423227)黃冠祺(41423243)郭柏漢(41423234)
+蘇鵬達(41423254)姚沅錡(41423225)李篆(41423218)
 
-*我是斜咖*
-**哈哈屁眼**
+## 什麼是 git, GitHub, gist 與cmsimde? 
 
-![自己掰開](https://github.com/skyler09090718-wq/group3/blob/main/ooFpnaKoqAJDA2aBE3Jke9SBCtqfQAWXAEIgQD.jpg?raw=true)
+## 如何使用這些工具？為什麼要使用這些工具？
