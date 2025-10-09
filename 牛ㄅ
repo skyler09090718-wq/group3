@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Brython 多功能互動網頁</title>
+    <!-- 載入 Brython -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js"></script>
+</head>
+<body onload="brython()" style="font-family: sans-serif; padding: 20px;">
+
+    <h2>👋 Brython 多功能互動網頁</h2>
+
+    <!-- 按鈕 + 變色顯示 -->
+    <button id="my-button">點我一下</button>
+    <div id="output" style="margin-top: 10px; font-weight: bold; color: green;"></div>
+
+    <hr>
+
+    <!-- 倒數計時 -->
+    <h3>⏳ 倒數計時器</h3>
+    <button id="countdown-button">開始倒數（5 秒）</button>
+    <div id="countdown-display" style="margin-top: 10px; color: red;"></div>
+
+    <hr>
+
+    <!-- 表單輸入 -->
+    <h3>📝 輸入表單</h3>
+    <input id="name-input" placeholder="輸入你的名字">
+    <button id="submit-name">送出</button>
+    <div id="name-output" style="margin-top: 10px; font-weight: bold;"></div>
+
+    <hr>
+
+    <!-- 即時時間 -->
+    <h3>⏰ 現在時間</h3>
+    <div id="time-display" style="font-size: 20px; color: blue;"></div>
+
+    <!-- Python 程式碼 -->
+    <script type="text/python">
+        from browser import document, bind, timer
+        from datetime import datetime
+
+        # ✅ 1. 按鈕點擊 + 顯示文字 + 按鈕變色
+        @bind(document["my-button"], "click")
+        def on_click(event):
+            document["output"].text = "你點了按鈕！"
+            event.target.style.backgroundColor = "#FFD700"  # 金黃色
+            event.target.textContent = "再點一次看看 😎"
+
+        # ✅ 2. 倒數計時器
+        countdown = 5
+        countdown_id = None  # 儲存 timer id
+
+        def update_countdown():
+            global countdown, countdown_id
+            if countdown > 0:
+                document["countdown-display"].text = f"剩下 {countdown} 秒..."
+                countdown -= 1
+                countdown_id = timer.set_timeout(update_countdown, 1000)
+            else:
+                document["countdown-display"].text = "倒數結束！"
+                countdown = 5  # 重設
+
+        @bind(document["countdown-button"], "click")
+        def start_countdown(event):
+            global countdown
+            countdown = 5
+            update_countdown()
+
+        # ✅ 3. 表單輸入
+        @bind(document["submit-name"], "click")
+        def on_submit(event):
+            name = document["name-input"].value.strip()
+            if name:
+                document["name-output"].text = f"哈囉，{name}！歡迎使用 Brython 😊"
+            else:
+                document["name-output"].text = "請輸入你的名字再送出喔！"
+
+        # ✅ 4. 實時時間顯示
+        def show_time():
+            now = datetime.now()
+            current_time = now.strftime("%H:%M:%S")
+            document["time-display"].text = f"現在時間：{current_time}"
+            timer.set_timeout(show_time, 1000)
+
+        show_time()  # 初始化時間
+    </script>
+
+</body>
+</html>
